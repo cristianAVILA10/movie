@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:movie_2/providers/movie_provider.dart';
 import 'package:movie_2/screens/screens.dart';
+import 'package:provider/provider.dart';
 
-void main(){
-  runApp(MyApp());
+void main() {
+  runApp(AppState());
+}
+
+class AppState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => MovieProvider(),
+          lazy: false,
+        )
+      ],
+      child: MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
@@ -16,11 +32,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => HomeScreen(),
         '/details': (context) => DetailsMovieScreen()
       },
-      theme: ThemeData.light().copyWith(
-        appBarTheme: AppBarTheme(
-          color: Colors.indigo
-        )
-      ),
+      theme: ThemeData.light()
+          .copyWith(appBarTheme: AppBarTheme(color: Colors.indigo)),
     );
   }
 }
