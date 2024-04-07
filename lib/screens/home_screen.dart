@@ -4,6 +4,7 @@ import 'package:movie_2/providers/popular_provider.dart';
 import 'package:movie_2/widgets/card_swipper.dart';
 import 'package:movie_2/widgets/movie_slider.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

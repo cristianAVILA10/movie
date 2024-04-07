@@ -30,7 +30,7 @@ class MovieSlider extends StatelessWidget {
               itemBuilder: (_, int index){
                 final Popular popular = populares[index];
                 return Container(
-                  width:  130,
+                  width: 130,
                   height: 190,
                   margin: EdgeInsets.only(right: 20),
                   child: Column(
