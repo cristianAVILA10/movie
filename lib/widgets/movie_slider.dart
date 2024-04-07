@@ -1,9 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:movie_2/models/popular.dart';
+
 
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({super.key});
+  
+  final List<Popular> populares;
+
+  const MovieSlider({
+    Key? key,
+    required this.populares
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +25,10 @@ class MovieSlider extends StatelessWidget {
           SizedBox(height: 3,),
           Expanded(
             child: ListView.builder(
-              itemCount: 10,
+              itemCount: populares.length,
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
+              itemBuilder: (_, int index){
+                final Popular popular = populares[index];
                 return Container(
                   width:  130,
                   height: 190,
@@ -29,15 +38,15 @@ class MovieSlider extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: FadeInImage(
-                          placeholder: AssetImage('images/no-image.jpg'),
-                          image: NetworkImage("https://via.placeholder.com/300x400"),
+                          placeholder: AssetImage('assets/placeholder_image.jpg'),
+                          image: NetworkImage('https://image.tmdb.org/t/p/w500'+popular.posterPath!),
                           height: 190,
                           width: 130,
                           fit: BoxFit.cover,
                         ),
                       ),
                       SizedBox(height: 5,),
-                      Text("Un Fatto Di Sangue Nel Comune Di Siculiana Fra Due Uomini Per Causa Di Una Vedova. Si Sospettano Moventi Politici. Amore-Morte-Shimmy",
+                      Text(popular.title ?? "",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         textAlign: TextAlign.center,
@@ -54,6 +63,7 @@ class MovieSlider extends StatelessWidget {
   }
 }
 
+
 class _Title extends StatelessWidget {
   const _Title({super.key});
 
@@ -61,7 +71,7 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 20, top: 5),
-      child: Text('Populares', style: TextStyle(
+      child: Text('Popular', style: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.bold
       ),)
